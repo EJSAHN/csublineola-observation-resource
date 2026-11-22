@@ -1,0 +1,21 @@
+{
+  "title": "Colletotrichum sublineola observation resource: verification code",
+  "upload_type": "software",
+  "creators": [
+    {
+      "name": "Ahn, Ezekiel",
+      "affiliation": "Sustainable Perennial Crops Laboratory, USDA Agricultural Research Service",
+      "orcid": "0000-0003-4447-4104"
+    }
+  ],
+  "description": "Verification code for a Colletotrichum sublineola host-reaction and genomic-observation resource. It checks archived data, recounts read support and observation masks, and reproduces the tables and figures. Research data are distributed separately.",
+  "access_right": "open",
+  "license": "cc-zero",
+  "keywords": [
+    "Colletotrichum sublineola",
+    "sorghum",
+    "genomics",
+    "reproducibility",
+    "data resource"
+  ]
+}

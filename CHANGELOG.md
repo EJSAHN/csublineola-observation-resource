@@ -1,5 +1,10 @@
 # Changelog
 
+## Unreleased
+
+- Link the archived v0.3.3 code DOI from the README.
+- Supply Zenodo title and creator metadata for future releases.
+
 ## 0.3.3 — 2026-11-21
 
 - Use `--followup` and `--masks` in commands and examples; keep the previous options

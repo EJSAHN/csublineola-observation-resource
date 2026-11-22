@@ -6,12 +6,12 @@ Verification code for the *Colletotrichum sublineola* host-reaction and
 genomic-observation resource. It checks archived data, recounts read support and
 observation masks, and reproduces the article's tables and figures.
 
-[![Code archive v0.3.2](https://zenodo.org/badge/DOI/10.5281/zenodo.24432601.svg)](https://doi.org/10.5281/zenodo.24432601)
+[![Code archive v0.3.3](https://zenodo.org/badge/DOI/10.5281/zenodo.24433316.svg)](https://doi.org/10.5281/zenodo.24433316)
 
 Version 0.3.3 updates the documentation, command names and platform checks;
 see [CHANGELOG.md](CHANGELOG.md). The numerical scripts are unchanged from
 [v0.3.2, archived on Zenodo](https://doi.org/10.5281/zenodo.24432601).
-The DOI badge above identifies that earlier archive.
+The DOI badge above identifies the archived v0.3.3 release.
 
 ## Quick start
 
@@ -149,8 +149,8 @@ submission. Stored identifiers and output keys are explained in the
 
 ## Citation and license
 
-The archived v0.3.2 code is available at
-[doi:10.5281/zenodo.24432601](https://doi.org/10.5281/zenodo.24432601).
+The archived v0.3.3 code is available at
+[doi:10.5281/zenodo.24433316](https://doi.org/10.5281/zenodo.24433316).
 When using a later commit, record its commit identifier as well.
 
 Original code and documentation are released under

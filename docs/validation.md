@@ -6,6 +6,8 @@ Automated tests cover phenotype and genotype semantics, pileup parsing, interval
 operations, manifest integrity and command compatibility. Test data are synthetic
 and contain no research records. The workflow also checks that the original
 verifier files retain their recorded SHA-256 hashes.
+Repository attributes preserve LF line endings when cloning on Windows, keeping
+the verifier files identical across platforms.
 
 The public command names use `--followup` and `--masks`; the earlier options remain
 valid. All nine numerical scripts from v0.3.2 are unchanged. The follow-up command

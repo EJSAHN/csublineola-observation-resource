@@ -14,6 +14,8 @@
 - Add command-compatibility and wrapper tests, including a Windows PowerShell
   job in continuous integration. Compare a full verification run with v0.3.2:
   all numerical outputs match, with only elapsed time changing in the status file.
+- Preserve LF line endings during checkout so Windows Git settings do not alter
+  the byte identities of the archived verifiers.
 
 ## 0.3.2 — 2026-11-21
 

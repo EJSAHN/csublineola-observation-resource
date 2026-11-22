@@ -1,152 +1,156 @@
 # C. sublineola observation resource
 
-Code version 0.3.2. Resource-replay code for the *Colletotrichum sublineola* host-reaction and
-genomic-observation data descriptor.
+Verification code for the *Colletotrichum sublineola* host-reaction and
+genomic-observation resource. It checks archived data, recounts read support and
+observation masks, and reproduces the article's tables and figures.
 
-Repository: https://github.com/EJSAHN/csublineola-observation-resource
+[![Code archive v0.3.2](https://zenodo.org/badge/DOI/10.5281/zenodo.24432601.svg)](https://doi.org/10.5281/zenodo.24432601)
 
-The code is public. Data deposition and the manuscript are in preparation. The synthetic
-tests below run with this repository alone; reproducing the manuscript tables also requires
-the three separately distributed input archives. Public data accessions and a code DOI
-will be added when available.
+The archived code release is [v0.3.2](https://github.com/EJSAHN/csublineola-observation-resource/tree/v0.3.2).
+This branch includes subsequent documentation and command-interface updates;
+see [CHANGELOG.md](CHANGELOG.md). The archived release remains available for
+reproducing that version.
 
-The code reproduces the sample inventories, host-reaction summaries, SNP-panel accounting
-and read-support summaries reported in the article. The resource concerns fungal isolates
-and their reactions on sorghum host differentials.
+## Quick start
 
-## What the code runs
-
-1. Verifies every file against the resource manifest.
-2. Checks all phenotype cells, the complete biallelic catalogue and the selected TSV/VCF
-   genotypes, preserving missing values.
-3. Parses the archived pileups with a separate parser and reproduces read-support classifications.
-4. Generates the numerical source tables used in the article.
-5. Recounts alternate-allele concentration, minor-allele counts, per-isolate missingness,
-   transition/transversion counts, pairwise comparison denominators and carrier-specific read support.
-6. With `--sd13`, verifies the completed follow-up read audit (internal run label SD13) and
-   parses its 181,050 support records before generating the follow-up audit table.
-7. With `--maskdata`, verifies the archived observation masks against their recorded checksums
-   and recounts genome-wide and coding-sequence intervals.
-
-Requirements: Python 3.9 or newer, standard library only. No network download or package
-installation is needed. Do not use Python's `-O` option. Use a new output directory for each run.
-
-Run the tests from the repository directory:
+Python 3.9 or newer is required. Verification uses the Python standard library.
+Run the synthetic tests without downloading any research data:
 
 ```bash
 python -m unittest discover -s tests -v
 ```
 
-To reproduce all manuscript source tables, supply all three inputs:
+For the full set of numerical tables, provide the resource export, follow-up
+read-audit archive and observation masks:
 
 ```bash
-python run.py --data /path/to/release_candidate --sd13 /path/to/completed_SD13_run --maskdata /path/to/recovered_mask_data --out /path/to/new_replay
+python run.py --data /path/to/resource --followup /path/to/followup_audit --masks /path/to/observation_masks --out /path/to/new_results
 ```
 
-Windows PowerShell:
+Use an unused output directory and run Python without `-O`, which disables some
+checks. Inputs are checked before use and remain unchanged.
+
+### Windows PowerShell
+
+Activate a Python 3.9+ environment, then run:
 
 ```powershell
-powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\run.ps1 -Data 'D:\projects\csublineola_resource\release_candidate' -Out 'D:\projects\csublineola_resource\replay_001' -Python 'python' -SD13 'D:\projects\csublineola_resource\completed_SD13_run' -MaskData 'D:\projects\csublineola_resource\recovered_mask_data'
+powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\run.ps1 `
+  -Data 'D:\projects\csublineola_resource\resource' `
+  -Followup 'D:\projects\csublineola_resource\followup_audit' `
+  -Masks 'D:\projects\csublineola_resource\observation_masks' `
+  -Out 'D:\projects\csublineola_resource\results_001' -Python 'python'
 ```
 
-The Python executable shown is an example; an activated Python 3.9+ environment also works.
-The PowerShell and Slurm wrappers call the same Python entry point; they have been syntax
-checked but not yet run on Windows or under Slurm.
+### Slurm
 
-On a Slurm cluster, submit the wrapper rather than running on a login node:
+Use your allocation and partition names:
 
 ```bash
-sbatch run_ceres.sh /absolute/path/to/this/repository /absolute/path/to/release_candidate /absolute/path/to/new_replay /absolute/path/to/completed_SD13_run /absolute/path/to/recovered_mask_data
+sbatch --account=YOUR_ACCOUNT --partition=YOUR_PARTITION run_slurm.sh \
+  /absolute/path/to/repository /absolute/path/to/resource \
+  /absolute/path/to/new_results /absolute/path/to/followup_audit \
+  /absolute/path/to/observation_masks
 ```
 
-The wrapper requests two CPUs, 8 GB and 30 minutes. Its first argument is the repository path,
-because Slurm runs a spooled copy of the script. Change the account directive for another allocation.
+The script requests two CPUs, 8 GB and 30 minutes. The repository path is required
+because Slurm executes a spooled copy of the script. Activate the required Python
+environment before submission.
 
-## Inputs and outputs
+## Inputs
 
 | Input | Option | Contents |
 |---|---|---|
-| Resource export | `--data` (required) | The intact `release_candidate` directory: sample records, catalogue, selected panel, stratified read audit, validation and metadata. |
-| Follow-up read audit | `--sd13` (optional) | The completed run directory with `code/`, `results/`, `runner_status.json` and three SHA-256 manifests. Required to reproduce the follow-up audit table. Keep it intact. |
-| Observation masks | `--maskdata` (optional) | Genome-wide and coding-sequence mask BED files, coding-sequence intervals, mask summaries and the recorded contract that pins their checksums. Required for the mask-size check. |
+| Resource export | `--data` | Sample records, variant catalogue, selected genotypes, stratified read-audit pileups and checksum manifests. |
+| Follow-up read audit | `--followup` | Completed audit archive with `code/`, `results/`, `runner_status.json` and three SHA-256 manifests. Required for the follow-up audit table. |
+| Observation masks | `--masks` | Genome-wide and coding-sequence BED masks, coding-sequence intervals, summaries and the checksum contract. Required for the mask-size check. |
 
-None of these inputs is included in this repository. Their public repository records,
-DOIs and licenses are assigned by the data owners.
+Only `--data` is required for a basic run. Include both other inputs to reproduce
+all numerical tables. Directory names can be chosen freely; preserve the files
+and relative paths inside each archive.
 
-Outputs are `verification/`, `tables/`, `panel_structure/`, optional `targeted_audit/`,
-optional `recovered_mask/` and `run_status.json`. The follow-up audit table is written to
-`targeted_audit/paper_summary/`. A failed check stops the run. A `PASS` confirms the archived
-resource and the stated calculations; it does not certify every genomic call.
+Research data are distributed separately. Download links for these three inputs
+are not yet available in this repository. Access and reuse terms will accompany
+the data records supplied by the data owners.
 
-## Scope
+## Checks and outputs
 
-The code reproduces the article's descriptive tables from archived data and recounts the
-original pileups with a separate parser. It does not regenerate the observation atlas or the
-joint variant calls from BAM files, realign reads or repeat laboratory assays. The upstream
-workflows that produced the archived data require the original alignments, reference,
-annotation and run metadata; they are described in `docs/upstream_methods.md`.
+The workflow verifies checksums, phenotype cells, the biallelic catalogue and
+agreement between the selected TSV and VCF genotypes. A separate parser recounts
+saved pileups and their read-support classifications. Further summaries describe
+allele counts, missingness, pairwise differences and support within carrier groups.
 
-The export verifiers are byte-identical to the checkers used when the resource was assembled;
-their hashes are recorded in `docs/original_verifier_hashes.json`. The follow-up audit parser
-is byte-identical to the parser in the completed run (`docs/sd13_verifier_identity.json`). It
-runs on a temporary copy, and input manifests are checked before and after the replay.
-Summary code is covered by unit tests; see `docs/validation.md`.
+| Output | Contents |
+|---|---|
+| `verification/` | Resource and pileup verification reports. |
+| `tables/` | Numerical tables for the article and figure generation. |
+| `panel_structure/` | Allele counts, missingness and pairwise summaries. |
+| `targeted_audit/` | Follow-up audit verification; its summary tables are in `paper_summary/`. |
+| `recovered_mask/` | Observation-mask checksums, interval counts and intersections. |
+| `run_status.json` | Overall status, software environment and component results. |
 
-No manuscript, correspondence, unpublished reference, phenotype table or genotype matrix is
-included here. The continuous-integration workflow uses synthetic test data only; a full-data
-check requires the separate resource export.
+The follow-up audit and mask directories are created when their respective inputs are supplied.
+A failed check stops the run. These checks establish agreement with the archived
+records; genotype accuracy requires additional evidence.
 
 ## Figures
 
-After a successful full-data replay, figures can be regenerated with Python 3.10+ and the
-plotting library version recorded in `requirements-figures.txt`:
+Install the plotting dependencies from `requirements-figures.txt` in a Python
+3.10+ environment, then use the tables produced above:
 
 ```bash
-python scripts/plot_tables.py --tables /path/to/new_replay/tables --out /path/to/new_figures
+python -m pip install -r requirements-figures.txt
+python scripts/plot_tables.py --tables /path/to/new_results/tables --out /path/to/new_figures
 ```
 
-This optional step writes both article figures as PNG and vector PDF. Figure labels and
-plotting ranges are specific to this resource.
+This writes both article figures as PNG and vector PDF. Labels and plotting
+ranges are specific to this resource.
 
-## Data semantics
+## Interpretation
 
-R, resistant host reaction; S, susceptible host reaction; V, variable recorded outcomes.
-V is neither a missing value nor a probability of disease. Haploid genotype 0 is the reference
-allele, 1 is the alternate allele and a dot is an unretained or missing call. The selected
-panel combines a position-level observation mask with a retained-call threshold; it is not a
-new genotype callset at mapping quality 40. See the article, `docs/upstream_methods.md` and
-the data dictionary in the data release.
+R denotes a resistant host reaction, S a susceptible host reaction and V variable
+recorded outcomes. V is neither a missing value nor a probability of disease.
+For haploid genotypes, 0 is the reference allele, 1 the alternate allele and a dot
+an unretained or missing call. The selected panel combines an observation mask
+with a retained-call threshold; the allele calls retain their original calling
+filters.
 
-## Variation in the selected panel
+At 43,389 of 43,814 selected sites, alternate calls occur only in eight isolates
+(FSP348, FSP350, FSP351, FSP353, FSP357, FSP360, FSP363 and FSP369). The remaining
+134 isolates carry alternate calls at 425 sites: 421 are polymorphic among retained
+calls, and four have only alternate retained calls. Under mapping quality 40,
+base quality 20 and recalculated base alignment quality, the follow-up audit
+supports 1,934 of 1,979 baseline alternate calls in these 134 isolates, including
+1,453 of 1,489 at the 421 polymorphic sites. These are read-support results from
+the same supplied alignments. The eight-isolate grouping is descriptive and is
+not a species or population assignment.
 
-At 43,389 of 43,814 selected sites, alternate calls occur only in eight isolates (FSP348,
-FSP350, FSP351, FSP353, FSP357, FSP360, FSP363 and FSP369). This grouping is defined in the
-summary script for reporting; it is not a taxonomic or population assignment. The other
-134 isolates carry alternate calls at 425 selected sites: 421 are polymorphic among their
-retained calls, and at four sites all retained calls are alternate. In the follow-up audit,
-under mapping quality 40 and base quality 20 with recalculated base alignment quality,
-1,934 of 1,979 baseline alternate calls in these 134 isolates retain alternate support,
-including 1,453 of 1,489 at the 421 polymorphic sites. These figures describe read support
-in the same alignments, not independent sequencing validation.
+## Methods and validation
 
-Internal identifiers are kept as join keys because existing checksums and VCF records depend
-on them; `docs/internal_labels.md` explains each one. Join records by FSP identifier and
-genomic coordinates.
+The workflow starts from archived records and pileups. Joint calling and
+genome-wide observation measurement are described in
+[upstream methods](docs/upstream_methods.md). Their BAM-based calculations are
+outside this repository's verification workflow.
 
-## Release status
+The original parsers and numerical scripts are preserved, with verifier
+identities recorded in [original_verifier_hashes.json](docs/original_verifier_hashes.json)
+and [sd13_verifier_identity.json](docs/sd13_verifier_identity.json). The follow-up
+parser writes its report on temporary copies. The workflow checks input manifests
+again afterwards. See [validation](docs/validation.md) for results and the scope of
+the tests.
 
-The public code is maintained at the repository URL above. Code version 0.3.2 restores
-the continuous-integration workflow and ignore rules omitted during the initial web upload,
-adds the license, and updates the documentation. The numerical scripts, tests and recorded
-verifier hashes are unchanged from code version 0.3.1. See `CHANGELOG.md`.
+Existing commands still work: `--sd13` is an alias for `--followup`, `--maskdata`
+for `--masks`, and the PowerShell parameters `-SD13` and `-MaskData` are accepted.
+`run_ceres.sh` forwards to `run_slurm.sh`; pass your Slurm account and partition at
+submission. Stored identifiers and output keys are explained in the
+[archive label glossary](docs/internal_labels.md).
 
-The data accessions, archived code DOI and manuscript citation are pending. A public GitHub
-repository is not a substitute for the data archives. Record the exact Git commit used in
-any replay; the manuscript version and code version have separate numbering.
+## Citation and license
 
-## License
+The archived v0.3.2 code is available at
+[doi:10.5281/zenodo.24432601](https://doi.org/10.5281/zenodo.24432601).
+When using a later commit, record its commit identifier as well.
 
-The original code and documentation in this repository are released under the
-[CC0 1.0 Universal public-domain dedication](LICENSE). See `NOTICE.md` for its scope.
-This dedication does not grant rights to separately supplied sequencing data, phenotype
-records, reference assemblies, annotations or third-party software.
+Original code and documentation are released under
+[CC0 1.0 Universal](LICENSE). Separate data, reference assemblies, annotations and
+third-party software retain their own terms; see [NOTICE.md](NOTICE.md).

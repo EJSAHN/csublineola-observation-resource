@@ -2,12 +2,12 @@ param(
     [Parameter(Mandatory=$true)][string]$Data,
     [Parameter(Mandatory=$true)][string]$Out,
     [string]$Python = 'python',
-    [string]$SD13 = '',
-    [string]$MaskData = ''
+    [Alias('SD13')][string]$Followup = '',
+    [Alias('MaskData')][string]$Masks = ''
 )
 $ErrorActionPreference = 'Stop'
 $runArgs = @((Join-Path $PSScriptRoot 'run.py'), '--data', $Data, '--out', $Out)
-if ($SD13) { $runArgs += @('--sd13', $SD13) }
-if ($MaskData) { $runArgs += @('--maskdata', $MaskData) }
+if ($Followup) { $runArgs += @('--followup', $Followup) }
+if ($Masks) { $runArgs += @('--masks', $Masks) }
 & $Python @runArgs
-if ($LASTEXITCODE -ne 0) { throw "Replay failed with exit code $LASTEXITCODE" }
+if ($LASTEXITCODE -ne 0) { throw "Verification failed with exit code $LASTEXITCODE" }

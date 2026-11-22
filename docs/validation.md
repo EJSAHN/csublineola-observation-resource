@@ -2,6 +2,11 @@
 
 ## Current checks
 
+Version 0.3.4 changes documentation and archive links only. Numerical scripts,
+command wrappers, tests and verifier hashes are unchanged from v0.3.3. The
+[v0.3.2 source commit](https://github.com/EJSAHN/csublineola-observation-resource/tree/bd07093bd81c684dcb1078b973e179d400ee398f)
+used in the earlier comparisons remains accessible in the Git history.
+
 The 28-test suite passes on Ubuntu 22.04 with Python 3.9 and 3.12, and on
 Windows Server 2022 with Python 3.12. POSIX wrapper tests run on Linux;
 PowerShell wrapper tests run on Windows. Inapplicable wrapper tests are skipped.
@@ -17,7 +22,7 @@ The public command names use `--followup` and `--masks`; the earlier options rem
 valid. All nine numerical scripts from v0.3.2 are unchanged. The follow-up command
 calls the same implementation and retains its output schema.
 
-The updated command and the archived v0.3.2 command were run on the same three
+The updated command and the v0.3.2 command were run on the same three
 input archives on Linux with Python 3.12.14. Both passed. Of 40 output files,
 39 were byte-identical; `run_status.json` differed only in elapsed time
 (42.555 versus 42.084 seconds). This comparison verifies the command update

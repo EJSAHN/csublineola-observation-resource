@@ -1,17 +1,18 @@
 # C. sublineola observation resource
 
-Version 0.3.3
+Version 0.3.4
 
 Verification code for the *Colletotrichum sublineola* host-reaction and
 genomic-observation resource. It checks archived data, recounts read support and
 observation masks, and reproduces the article's tables and figures.
 
-[![Code archive v0.3.3](https://zenodo.org/badge/DOI/10.5281/zenodo.24433316.svg)](https://doi.org/10.5281/zenodo.24433316)
+[![Code archive](https://zenodo.org/badge/DOI/10.5281/zenodo.24432600.svg)](https://doi.org/10.5281/zenodo.24432600)
 
-Version 0.3.3 updates the documentation, command names and platform checks;
-see [CHANGELOG.md](CHANGELOG.md). The numerical scripts are unchanged from
-[v0.3.2, archived on Zenodo](https://doi.org/10.5281/zenodo.24432601).
-The DOI badge above identifies the archived v0.3.3 release.
+Version 0.3.4 corrects documentation and archive links;
+see [CHANGELOG.md](CHANGELOG.md). The numerical scripts are unchanged from the
+[v0.3.2 source commit](https://github.com/EJSAHN/csublineola-observation-resource/tree/bd07093bd81c684dcb1078b973e179d400ee398f).
+The DOI badge links to the Zenodo version collection. Cite the version-specific
+DOI for the release used in an analysis.
 
 ## Quick start
 
@@ -149,9 +150,10 @@ submission. Stored identifiers and output keys are explained in the
 
 ## Citation and license
 
-The archived v0.3.3 code is available at
-[doi:10.5281/zenodo.24433316](https://doi.org/10.5281/zenodo.24433316).
-When using a later commit, record its commit identifier as well.
+Archived releases are listed in the
+[Zenodo version collection](https://doi.org/10.5281/zenodo.24432600).
+Select the release used in an analysis and cite its version-specific DOI.
+For changes made after a release, also record the Git commit identifier.
 
 Original code and documentation are released under
 [CC0 1.0 Universal](LICENSE). Separate data, reference assemblies, annotations and

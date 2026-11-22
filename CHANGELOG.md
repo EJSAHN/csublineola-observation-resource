@@ -1,9 +1,14 @@
 # Changelog
 
-## Unreleased
+## 0.3.4 — 2026-11-21
 
-- Link the archived v0.3.3 code DOI from the README.
-- Supply Zenodo title and creator metadata for future releases.
+- Replace links to the withdrawn v0.3.2 Zenodo record with the preserved source
+  commit, keeping the earlier verification baseline accessible.
+- Link the README badge to the Zenodo version collection and explain how to cite
+  the DOI for a specific release.
+- Include verified Zenodo title and creator metadata in the release.
+- Leave numerical scripts, tests, command wrappers and verifier hashes unchanged
+  from v0.3.3.
 
 ## 0.3.3 — 2026-11-21
 
@@ -14,7 +19,7 @@
 - Add `run_slurm.sh` with allocation and partition supplied at submission;
   retain `run_ceres.sh` as a compatibility entry point.
 - Replace development-stage wording in the documentation with descriptions of
-  the data and analyses, and link the archived v0.3.2 code DOI.
+  the data and analyses, and document the v0.3.2 source baseline.
 - Preserve all nine existing numerical scripts and their recorded verifier hashes.
 - Add command-compatibility and wrapper tests, including a Windows PowerShell
   job in continuous integration. Compare a full verification run with v0.3.2:
@@ -30,4 +35,6 @@
 - Document input archives, commands and verification scope.
 - Preserve the numerical scripts, tests, wrappers and verifier identities from 0.3.1.
 
-Archived release: https://doi.org/10.5281/zenodo.24432601
+Source baseline: [commit bd07093bd81c](https://github.com/EJSAHN/csublineola-observation-resource/tree/bd07093bd81c684dcb1078b973e179d400ee398f).
+The original v0.3.2 Zenodo record was withdrawn; the source remains in the Git
+history and is the baseline for the comparisons described above.

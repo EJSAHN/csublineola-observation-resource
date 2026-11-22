@@ -1,0 +1,16 @@
+[
+  {
+    "public_file": "scripts/verify_release.py",
+    "source_package": "RAMOS_SD12_CERES_DATA_RELEASE_v0.12.0",
+    "source_file": "verify_release.py",
+    "sha256": "9db980159a48931ec0e7cf41f4e827e9b01a3db02f39a73ea5e2d571152f9f65",
+    "modification": "none"
+  },
+  {
+    "public_file": "scripts/verify_sd11.py",
+    "source_package": "RAMOS_SD12_CERES_DATA_RELEASE_v0.12.0",
+    "source_file": "verify_sd11.py",
+    "sha256": "ef949c1472857ab5bd23622322c5050c405a5ae6c57ce1d48d07a425d3639c07",
+    "modification": "none"
+  }
+]

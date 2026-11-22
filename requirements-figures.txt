@@ -1,0 +1,2 @@
+# Optional plotting only; Python >=3.10. Core verification uses the standard library.
+matplotlib==3.10.8

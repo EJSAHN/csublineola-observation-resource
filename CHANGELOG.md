@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## 0.3.3 — 2026-11-21
 
 - Use `--followup` and `--masks` in commands and examples; keep the previous options
   and PowerShell parameters as compatibility aliases.

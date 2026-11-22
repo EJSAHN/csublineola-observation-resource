@@ -1,15 +1,17 @@
 # C. sublineola observation resource
 
+Version 0.3.3
+
 Verification code for the *Colletotrichum sublineola* host-reaction and
 genomic-observation resource. It checks archived data, recounts read support and
 observation masks, and reproduces the article's tables and figures.
 
 [![Code archive v0.3.2](https://zenodo.org/badge/DOI/10.5281/zenodo.24432601.svg)](https://doi.org/10.5281/zenodo.24432601)
 
-The archived code release is [v0.3.2](https://github.com/EJSAHN/csublineola-observation-resource/tree/v0.3.2).
-This branch includes subsequent documentation and command-interface updates;
-see [CHANGELOG.md](CHANGELOG.md). The archived release remains available for
-reproducing that version.
+Version 0.3.3 updates the documentation, command names and platform checks;
+see [CHANGELOG.md](CHANGELOG.md). The numerical scripts are unchanged from
+[v0.3.2, archived on Zenodo](https://doi.org/10.5281/zenodo.24432601).
+The DOI badge above identifies that earlier archive.
 
 ## Quick start
 

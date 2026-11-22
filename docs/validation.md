@@ -2,6 +2,10 @@
 
 ## Current checks
 
+The 28-test suite passes on Ubuntu 22.04 with Python 3.9 and 3.12, and on
+Windows Server 2022 with Python 3.12. POSIX wrapper tests run on Linux;
+PowerShell wrapper tests run on Windows. Inapplicable wrapper tests are skipped.
+
 Automated tests cover phenotype and genotype semantics, pileup parsing, interval
 operations, manifest integrity and command compatibility. Test data are synthetic
 and contain no research records. The workflow also checks that the original

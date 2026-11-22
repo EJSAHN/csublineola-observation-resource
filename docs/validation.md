@@ -1,4 +1,9 @@
-# Validation of version 0.3.0
+# Numerical validation and its scope
+
+Code version 0.3.2 preserves the numerical scripts and tests from version 0.3.1.
+The changes concern repository documentation, licensing and the restored CI/ignore files.
+The measurements below describe the recorded validation of the underlying replay code;
+they are not evidence that every upstream analysis was rerun for this maintenance version.
 
 The frozen-export replay ran on Linux / Python 3.12.14 and passed in 43.344 seconds on the authoring host. This is a measured local time, not a Ceres queue estimate. Eighteen semantic, interval and manifest-integrity unit tests passed. This includes all inputs, the final SD13 result-hash recheck and the recovered-mask interval replay.
 

@@ -1,7 +1,14 @@
 # C. sublineola observation resource
 
-Version 0.3.1. Resource-replay code for the *Colletotrichum sublineola* host-reaction and
+Code version 0.3.2. Resource-replay code for the *Colletotrichum sublineola* host-reaction and
 genomic-observation data descriptor.
+
+Repository: https://github.com/EJSAHN/csublineola-observation-resource
+
+The code is public. Data deposition and the manuscript are in preparation. The synthetic
+tests below run with this repository alone; reproducing the manuscript tables also requires
+the three separately distributed input archives. Public data accessions and a code DOI
+will be added when available.
 
 The code reproduces the sample inventories, host-reaction summaries, SNP-panel accounting
 and read-support summaries reported in the article. The resource concerns fungal isolates
@@ -24,8 +31,15 @@ and their reactions on sorghum host differentials.
 Requirements: Python 3.9 or newer, standard library only. No network download or package
 installation is needed. Do not use Python's `-O` option. Use a new output directory for each run.
 
+Run the tests from the repository directory:
+
 ```bash
 python -m unittest discover -s tests -v
+```
+
+To reproduce all manuscript source tables, supply all three inputs:
+
+```bash
 python run.py --data /path/to/release_candidate --sd13 /path/to/completed_SD13_run --maskdata /path/to/recovered_mask_data --out /path/to/new_replay
 ```
 
@@ -121,5 +135,18 @@ genomic coordinates.
 
 ## Release status
 
-Repository URL, archived code DOI, data DOI and code license are pending; see
-`LICENSE_STATUS.md` before the first public release.
+The public code is maintained at the repository URL above. Code version 0.3.2 restores
+the continuous-integration workflow and ignore rules omitted during the initial web upload,
+adds the license, and updates the documentation. The numerical scripts, tests and recorded
+verifier hashes are unchanged from code version 0.3.1. See `CHANGELOG.md`.
+
+The data accessions, archived code DOI and manuscript citation are pending. A public GitHub
+repository is not a substitute for the data archives. Record the exact Git commit used in
+any replay; the manuscript version and code version have separate numbering.
+
+## License
+
+The original code and documentation in this repository are released under the
+[CC0 1.0 Universal public-domain dedication](LICENSE). See `NOTICE.md` for its scope.
+This dedication does not grant rights to separately supplied sequencing data, phenotype
+records, reference assemblies, annotations or third-party software.
